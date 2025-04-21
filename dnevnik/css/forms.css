@@ -1,0 +1,59 @@
+.file-upload {
+  display: none;
+}
+
+.file-upload__label {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--color-button-upload);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload__label:hover {
+  background-color: var(--color-button-upload-hover);
+}
+
+.file-upload__filename {
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin-top: 10px;
+}
+
+.file-upload__button {
+  font-family: "Roboto Condensed", serif;
+  padding: 10px 20px;
+  color: rgb(231, 205, 255);
+  font-size: 50px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--color-button-action);
+}
+
+.bg-red {
+  background-color: var(--color-button-delete);
+}
+
+.bg-blue:hover {
+  background-color: var(--color-button-action-hover);
+}
+.bg-red:hover {
+  background-color: var(--color-button-delete-hover);
+}
+
+.delete-button{
+  font-weight: 900;
+  background-color: var(--color-button-delete);
+}
+
+.delete-button:hover{
+  background-color: var(--color-button-delete-hover);
+}

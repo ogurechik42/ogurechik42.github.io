@@ -1,0 +1,16 @@
+.graphic-stats {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.graphic-stats__chart {
+  max-width: 600px;
+  max-height: 300px;
+}
+
+.graphic-stats__chart :hover {
+  transform: scale(1.2);
+}

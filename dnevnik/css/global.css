@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,355;1,355&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import "header.css";
+@import "tabs.css";
+@import "tables.css";
+@import "forms.css";
+@import "graphics.css";
+@import "about.css";
+@import "footer.css";
+
+:root {
+  --color-primary: #8c8f94;
+  --color-secondary: #34546;
+  --fon-menu: #555;
+  --color-background: #eeeeee;
+  --color-button-hover: #904167;
+  --color-button-upload: #994caf;
+  --color-button-upload-hover: #a44242;
+  --color-button-action: #ba00b4;
+  --color-button-action-hover: #9a0085;
+  --color-table-header: #f4f4f4;
+  --color-table-border: #ccc;
+  --color-input-focus: #ff00d4;
+  --color-button-delete: red;
+  --color-button-delete-hover: rgb(170, 28, 28);
+  --color-select-background: #555;
+  --color-select-hover: #f1f1f1;
+  --color-text: #333;
+  --color-text-light: #555;
+  --color-shadow: rgba(1, 4, 0, 0.1);
+}
+
+body {
+  font-family: "Roboto Condensed", serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
+.main {
+  padding: 1em;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}

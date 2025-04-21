@@ -1,0 +1,29 @@
+.tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  .tab-content__title {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  .tab-content__description {
+    font-size: 1em;
+    color: var(--color-text);
+    margin-bottom: 1.5em;
+  }
+
+  .tab-content__home__title{
+    font-size: 10em;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tab-content__home__description{
+    display: flex;
+    justify-content: center;
+  }

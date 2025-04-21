@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Дневник</title>
+    <link rel="icon" href="./images/p.jpg" />
+    <link rel="stylesheet" href="./css/global.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="burger-menu">
+        <div class="burger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <nav class="header__nav">
+        <button
+          class="header__nav-button"
+          onclick="handleButtonClick('upload')"
+        >
+          Загрузка оценок
+        </button>
+        <button class="header__nav-button" onclick="handleButtonClick('edit')">
+          Создание и редактирование
+        </button>
+        <button
+          class="header__nav-button"
+          onclick="handleButtonClick('table-stats'); document.querySelector('#table-stats-select').value = 'informatics'; handleSubjectChange();"
+        >
+          Табличная статистика
+        </button>
+        <button
+          class="header__nav-button"
+          onclick="handleButtonClick('graphic-stats'); updateGraphicStats(2);"
+        >
+          Графическая статистика
+        </button>
+        <button class="header__nav-button" onclick="handleButtonClick('help')">
+          <img class="header__nav-logo" src="./images/question.png" />
+          Помощь
+        </button>
+        <button
+          class="header__nav-button"
+          onclick="handleButtonClick('about_me')"
+        >	
+        <img class="header__nav-logo" src="./images/info.png" />
+          О приложении
+        </button>
+        <button class="header__nav-button" onclick="handleButtonClick('help')">
+          <img class="header__nav-logo" src="./images/logo.jpg" />
+          Профиль
+        </button>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section id="home_page" class="tab-content active"> 
+	<video autoplay muted loop id="vidos">
+  		<source src="./images/vd.mp4" type="video/mp4">
+	</video>
+	<h3 class="tab-content__home__title">ДНЕВНИК</h3>
+	</div>
+      </section>
+      <section id="upload" class="tab-content">
+        <h2 class="tab-content__title">Загрузка оценок</h2>
+        <p class="tab-content__description">
+          Здесь вы можете загрузить оценки, выбрав один из предложенных форматов
+          файла (.сsv, .txt, .xlsx):
+        </p>
+        <input
+          type="file"
+          id="file-upload"
+          class="file-upload"
+          accept=".csv, .txt, .xlsx"
+          onchange="updateFileName()"
+        />
+        <label for="file-upload" class="file-upload__label"
+          >Выберите файл</label
+        >
+        <button
+          type="button"
+          class="file-upload__button"
+          onclick="uploadFile()"
+        >
+          Загрузить
+        </button>
+        <button
+          type="button"
+          class="file-upload__button bg-red"
+          onclick="clearFileUpload()"
+        >
+          Удалить
+        </button>
+        <p id="file-name" class="file-upload__filename">Файл не выбран</p>
+        <table id="file-preview" class="table-preview">
+          <thead class="table-preview__head">
+            <tr class="table-edit__row">
+              <th class="table-preview__header">ФИО</th>
+              <th class="table-preview__header">Класс</th>
+              <th class="table-preview__header">Информатика</th>
+              <th class="table-preview__header">Физика</th>
+              <th class="table-preview__header">Математика</th>
+              <th class="table-preview__header">Литература</th>
+              <th class="table-preview__header">Музыка</th>
+            </tr>
+          </thead>
+          <tbody class="table-preview__body">
+            <tr class="table-preview__row">
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+              <td class="table-preview__data"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="edit" class="tab-content">
+        <h2 class="tab-content__title">Создание и редактирование</h2>
+        <p class="tab-content__description">
+          Создавайте и редактируйте оценки учащихся.
+        </p>
+        <table id="file-add" class="table-edit">
+          <thead class="table-edit__head">
+            <tr class="table-edit__row">
+              <th class="table-edit__header">ФИО</th>
+              <th class="table-edit__header">Класс</th>
+              <th class="table-edit__header">Информатика</th>
+              <th class="table-edit__header">Физика</th>
+              <th class="table-edit__header">Математика</th>
+              <th class="table-edit__header">Литература</th>
+              <th class="table-edit__header">Музыка</th>
+            </tr>
+          </thead>
+          <tbody class="table-edit__body"></tbody>
+        </table>
+        <button id="add-row-button" class="table-edit__button">
+          Добавить строку
+        </button>
+        <button id="download-button" class="table-edit__button">
+          Скачать таблицу
+        </button>
+      </section>
+
+      <section id="table-stats" class="tab-content">
+        <h2 class="tab-content__title">Табличная статистика</h2>
+        <p class="tab-content__description">Выберите предмет:</p>
+        <select id="table-stats-select" class="table-stats__select">
+          <option value="informatics">Информатика</option>
+          <option value="physics">Физика</option>
+          <option value="mathematics">Математика</option>
+          <option value="literature">Литература</option>
+          <option value="music">Музыка</option>
+        </select>
+        <p class="tab-content__description">
+          Таблица статистики для каждого класса и каждого предмета.
+        </p>
+        <table id="table_stats_classes" class="table-stats">
+          <thead class="table-stats__head">
+            <tr class="table-stats__row">
+              <th class="table-stats__header">Класс</th>
+              <th class="table-stats__header">Средняя оценка</th>
+              <th class="table-stats__header">Медиана</th>
+              <th class="table-stats__header">5</th>
+              <th class="table-stats__header">4</th>
+              <th class="table-stats__header">3</th>
+              <th class="table-stats__header">2</th>
+            </tr>
+          </thead>
+          <tbody class="table-stats__body"></tbody>
+        </table>
+        <p class="tab-content__description">
+          Таблица статистики среди всех учеников для каждого предмета.
+        </p>
+        <table id="table_stats_all" class="table-stats">
+          <thead class="table-stats__head">
+            <tr class="table-stats__row">
+              <th class="table-stats__header">Средняя оценка</th>
+              <th class="table-stats__header">Медиана</th>
+              <th class="table-stats__header">5</th>
+              <th class="table-stats__header">4</th>
+              <th class="table-stats__header">3</th>
+              <th class="table-stats__header">2</th>
+            </tr>
+          </thead>
+          <tbody class="table-stats__body">
+            <tr class="table-stats__row">
+              <td class="table-stats__data"></td>
+              <td class="table-stats__data"></td>
+              <td class="table-stats__data"></td>
+              <td class="table-stats__data"></td>
+              <td class="table-stats__data"></td>
+              <td class="table-stats__data"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="graphic-stats" class="tab-content">
+        <h2 class="tab-content__title">Графическая статистика</h2>
+        <p class="tab-content__description">Выберите предмет:</p>
+        <select id="graphic-stats-select" class="table-stats__select">
+          <option value="informatics">Информатика</option>
+          <option value="physics">Физика</option>
+          <option value="mathematics">Математика</option>
+          <option value="literature">Литература</option>
+          <option value="music">Музыка</option>
+        </select>
+        <div class="graphic-stats">
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">Средняя оценка по классам</h3>
+            <canvas
+              id="class-stats-chart"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">Медиана по классам</h3>
+            <canvas
+              id="median-stats-chart"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">
+              Количество оценок "5" по классам
+            </h3>
+            <canvas
+              id="count-stats-chart-5"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">
+              Количество оценок "4" по классам
+            </h3>
+            <canvas
+              id="count-stats-chart-4"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">
+              Количество оценок "3" по классам
+            </h3>
+            <canvas
+              id="count-stats-chart-3"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">
+              Количество оценок "2" по классам
+            </h3>
+            <canvas
+              id="count-stats-chart-2"
+              class="graphic-stats__chart"
+            ></canvas>
+          </div>
+          <div class="graphic-stats__item">
+            <h3 class="graphic-stats__subtitle">Распределение оценок</h3>
+            <canvas id="all-stats-chart" class="graphic-stats__chart"></canvas>
+          </div>
+        </div>
+      </section>
+      <section id="help" class="tab-content">
+        <h2 class="tab-content__title">Помощь</h2>
+        <p class="tab-content__description">
+          Данный раздел представляет собой описание предназначения
+          веб-приложения "Alex.journal" и содержит подробную информацию для всех
+          вкладок.
+        </p>
+        <h3 class="help__subtitle">Загрузка оценок</h3>
+        <p class="help__text">
+          В данной вкладке Вы можете загрузить имеющийся журнал с оценками в
+          форматах <b>(.сsv, .txt, .xlsx).</b> Первая строка журнал представляет
+          собой шапку. В ней описаны: ФИО, класс, информатика, физика,
+          математика, литература, музыка. Порядок и соответсвтие важны. Это
+          обеспечивает правильный функционал веб-приложения. Для загрузки
+          журнала выберете файл, нажав на соответствующую кнопку. Название файла
+          появится снизу. Далее нажмите "Загрузить". Ниже Вы увидете загруженные
+          значения в табличном представлении.
+        </p>
+        <h3 class="help__subtitle">Создание и редактирование</h3>
+        <p class="help__text">
+          В этой вкладке можно редактировать загруженные значения, а также
+          добавлять и удалять строки. Поля "Информатика", "Физика" и т.д.
+          принимают только численные значения от 1 до 5. Чтобы сохранить
+          отредактированные значения в файл, нажмите "Скачать таблицу" ниже.
+          Таблица скачается в формате <b>.csv</b>.
+        </p>
+        <h3 class="help__subtitle">Табличная статистика</h3>
+        <p class="help__text">
+          Данная вкладка представляет собой статистические данные об
+          обучающихся, а именно: средняя оценка, медиана, количество оценок для
+          каждого предмета. Выбор предмета осуществляется из выпадающего списка.
+          Данные берутся из таблицы раздела "Создание и редактирование".
+          Статистика представлена для каждого класса и среди всех учеников для
+          каждого выбранного Вами предмета.
+        </p>
+        <h3 class="help__subtitle">Графическая статистика</h3>
+        <p class="help__text">
+          Этот раздел отражает статистические данные из таблиц вкладки
+          "Табличная статистика" для каждого предмета. Выбор предмета
+          осуществляется из выпадающего списка. Данные также берутся из таблицы
+          раздела "Создание и редактирование". Представлены следующие графики:
+          "Средняя оценка по классам", "Медиана по калссам", "Количество
+          оценок", "Распределение оценок".
+        </p>
+      </section>
+
+      <section id="about_me" class="tab-content">
+        <h2 class="tab-content__title">Контактные данные</h2>
+        <p class="tab-content__description">
+          Разработчик:Генерал лейтенант адмирал<br />Контактные
+          данные: lenavoronin@gmail.com
+        </p>
+        <img
+          src="./images/author.JPG"
+          class="about-me__image"
+        />
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>
